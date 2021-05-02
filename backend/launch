@@ -1,0 +1,4 @@
+#!/bin/bash
+python -m nltk.downloader stopwords
+python -m nltk.downloader wordnet
+python -m app flask --config_path config/flask.yml

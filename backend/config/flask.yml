@@ -1,0 +1,8 @@
+run_flask:
+  (): app.api.RunFlaskCommand
+  flask_config:
+    (): app.config.FlaskConfig
+    port: 5000
+    threaded: false
+  predictor:
+    (): app.predict.home.ModelZooPredictor
