@@ -3,11 +3,11 @@
   <br>
   <div class="home">
     <div class="container mx-auto flex justify-center items-center ">
-      <img class="h-72 w-auto px-4" src="src/assets/bearface.jpg"
+      <img class="h-72 w-auto px-4" src="../../assets/bearface.jpg"
            alt="Bear">
 
 
-    <img class="h-72 w-auto px-4" src="src/assets/bearface.jpg"
+    <img class="h-72 w-auto px-4" src="../../assets/bearface.jpg"
          alt="Bear">
     </div>
   <br>
