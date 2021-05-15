@@ -56,9 +56,9 @@
 
       </div>
     </div>
-    <div v-else-if="!started && !finished">
+    <div  class="min-h-screen flex items-center justify-center  sm:px-6 lg:px-8" v-else-if="!started && !finished">
       <button @click="startExperiment()"
-              class=" mx-auto my-5 flex justify-center items-center bg-green-500 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded focus:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-300 focus:ring-white">
+              class=" mx-auto  flex w-64 h-16 justify-center items-center bg-green-500 hover:bg-green-400 text-white  sm:text-2xl text-3xl font-bold py-2 px-4 rounded-lg focus:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-300 focus:ring-white">
         Start
       </button>
     </div>
@@ -67,7 +67,7 @@
         <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
           <img class="lg:w-36 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="../../assets/bear.png">
           <div class="text-center lg:w-2/3 w-full">
-            <h1 class="title-font sm:text-8xl text-3xl mb-4 font-medium text-gray-900">All done :)</h1>
+            <h1 class="title-font sm:text-8xl text-10xl mb-4 font-medium text-gray-900">All done :)</h1>
             <h2 class="title-font sm:text-2xl text-3xl mb-4 font-medium text-gray-900">Thanks {{name}} !</h2>
 
           </div>
