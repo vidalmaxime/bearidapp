@@ -52,7 +52,7 @@
           <!--        <input v-model="bear_name" type="text" name="identity" id="identity" class="focus:ring-green-500 focus:border-green-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Aardvark" />-->
           <!--      </div>-->
           <button @click="nextImage()"
-                  class="border-2 border-green-500 rounded-lg px-3 py-2 text-green-600 cursor-pointer hover:bg-green-500 hover:text-white">
+                  class="border-2 border-green-500 rounded-lg px-3 py-2 text-green-600 cursor-pointer hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50">
             Next
           </button>
         </div>

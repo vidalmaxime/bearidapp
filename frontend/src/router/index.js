@@ -1,19 +1,11 @@
-import { createWebHistory, createRouter } from "vue-router";
+import {createWebHistory, createRouter} from "vue-router";
 import home from "../views/home/home.vue";
-import inference from "../views/inference/inference.vue";
-// import Login from '../components/Login.vue'
-// import Register from '../components/Register.vue'
 
 const routes = [
     {
         path: "/",
         name: "home",
         component: home,
-    },
-    {
-        path: "/inference/:animal",
-        name: "inference",
-        component: inference,
     },
     {
         path: '/login',

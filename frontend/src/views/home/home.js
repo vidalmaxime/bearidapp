@@ -39,11 +39,11 @@ export default {
         const storage = firebase.storage();
         const storageRef = storage.ref();
         let promises = this.images.map((image) => {
-            return storageRef.child(`images/${image}`).getDownloadURL()
+            return storageRef.child(`newimages/${image}`).getDownloadURL()
         });
         Promise.all(promises).then((downloadURLs) => {
             const imageNames = downloadURLs.map(function (v) {
-                return v.split("?alt=media")[0].split("images%2F")[1]
+                return v.split("?alt=media")[0].split("newimages%2F")[1]
             });
             this.imageURLPairs = downloadURLs.reduce(function (result, field, index) {
                 result[imageNames[index]] = field;
