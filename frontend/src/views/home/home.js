@@ -1,5 +1,5 @@
 import navbar from "../../components/Navbar.vue";
-import {ref, onBeforeMount, onMounted} from 'vue';
+import {onBeforeMount, ref} from 'vue';
 import firebase from 'firebase';
 import imagePairs from './image_pairs.js';
 import images from './images.js';
@@ -36,29 +36,19 @@ export default {
     mounted() {
 
         this.getUserAnnotations2();
-        console.log("mounted value of images is" + this.images);
         const storage = firebase.storage();
         const storageRef = storage.ref();
-        // do this on mounted then store the list on client and pick from there? so only 1 request
         let promises = this.images.map((image) => {
-            console.log("image", image);
-            // return [image["id"], storageRef.child(`images/${image["image_one"]}`).getDownloadURL(), storageRef.child(`images/${image["image_two"]}`).getDownloadURL()];
             return storageRef.child(`images/${image}`).getDownloadURL()
         });
         Promise.all(promises).then((downloadURLs) => {
-            console.log("download", downloadURLs);
-            // this.downloadURLs = downloadURLs;
-            // this.image_one=downloadURLs[this.index]
-            // this.image_two=downloadURLs[this.index+1]
             const imageNames = downloadURLs.map(function (v) {
                 return v.split("?alt=media")[0].split("images%2F")[1]
             });
-            const imageURLPairs = downloadURLs.reduce(function (result, field, index) {
+            this.imageURLPairs = downloadURLs.reduce(function (result, field, index) {
                 result[imageNames[index]] = field;
                 return result;
             }, {})
-            this.imageURLPairs = imageURLPairs
-            console.log(imageURLPairs);
 
         })
     },
@@ -107,8 +97,6 @@ export default {
 
         startExperiment() {
             this.started = true;
-            console.log("start", this.userAnnotations);
-            console.log("startpairs", this.imagePairs);
             this.currentImagePairs = this.imagePairs.filter((
                 key
             ) => !this.userAnnotations.includes(key.id));
@@ -116,7 +104,6 @@ export default {
                 this.finished = true;
                 return;
             }
-            console.log(this.currentImagePairs);
             this.imageOne = this.imageURLPairs[this.currentImagePairs[this.index]["image_one"]];
             this.imageTwo = this.imageURLPairs[this.currentImagePairs[this.index]["image_two"]];
         },
@@ -124,13 +111,11 @@ export default {
         getUserAnnotations2() {
             const db = firebase.firestore();
             this.userAnnotations = [];
-            // const o = []
             db.collection("bears").where("user", "==", firebase.auth().currentUser.email)
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         this.userAnnotations.push(doc.data().pairId)
-                        console.log(doc.id, " => ", doc.data());
                     });
                 })
                 .catch((error) => {
@@ -163,7 +148,7 @@ export default {
     },
     watch: {
         imageURLPairs: function(val) {
-            console.log("RECIVED DAT");
+            console.log("Received User Annotations !");
             this.paused= false;
         }
     },
