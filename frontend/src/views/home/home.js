@@ -16,22 +16,6 @@ export default {
             if (user) {
                 name.value = user.email.split("@")[0];
             }
-
-            // var storage    = firebase.storage();
-            // var storageRef = storage.ref();
-            // var listRef = storageRef.child('images/');
-            // // Find all the prefixes and items.
-            // listRef.listAll()
-            //     .then((res) => {
-            //         res.items.forEach((itemRef) => {
-            //             console.log(itemRef.getDownloadURL());
-            //             console.log("itemref", itemRef);
-            //             // All the items under listRef.
-            //         });
-            //     }).catch((error) => {
-            //     // Uh-oh, an error occurred!
-            // });
-
         });
 
 
@@ -76,9 +60,7 @@ export default {
             this.imageURLPairs = imageURLPairs
             console.log(imageURLPairs);
 
-        });
-
-
+        })
     },
 
 
@@ -99,6 +81,7 @@ export default {
             currentPairId: 0,
             userAnnotations: [],
             currentImagePairs: [],
+            paused:true,
         };
     },
 
@@ -146,11 +129,6 @@ export default {
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        // this.userAnnotations.push({
-                        //     id: doc.id,
-                        //     user: doc.data().user,
-                        //     pair_id: doc.data().pair_id,
-                        // });
                         this.userAnnotations.push(doc.data().pairId)
                         console.log(doc.id, " => ", doc.data());
                     });
@@ -160,27 +138,6 @@ export default {
                 });
         },
 
-        getUserAnnotations() {
-            const db = firebase.firestore();
-            this.userAnnotations = [];
-            db.collection("bears")
-                .get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        // this.userAnnotations.push({
-                        //     id: doc.id,
-                        //     user: doc.data().user,
-                        //     pairId: doc.data().pairId,
-                        // });
-                        this.userAnnotations.push(doc.data().pairId)
-                        console.log(doc.id, " => ", doc.data());
-                    });
-                })
-                .catch((error) => {
-                    console.log("Error getting user annotations: ", error);
-                });
-            return this.userAnnotations
-        },
 
         createUserAnnotation(pairId, confidence, decision, imagePair) {
             const db = firebase.firestore();
@@ -204,7 +161,12 @@ export default {
         },
 
     },
-    computed: {},
+    watch: {
+        imageURLPairs: function(val) {
+            console.log("RECIVED DAT");
+            this.paused= false;
+        }
+    },
     components: {
         navbar
     },
