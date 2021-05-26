@@ -11,7 +11,6 @@ import firebase from "firebase"
 // import "firebase/auth";
 // import store from "./store";
 // import Vuex from "vuex";
-
 const firebaseConfig = {
     apiKey: "AIzaSyAXothiXCPqwnUr1RNxjtNEgbpv8fHUI5c",
     authDomain: "bearid.firebaseapp.com",
@@ -24,8 +23,5 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// firebase.auth().onAuthStateChanged(user => {
-//     store.dispatch("fetchUser", user);
-// });
 
 createApp(App).use(router).mount('#app')
